@@ -79,6 +79,7 @@ dl dd {
     padding: 0px;
     left: 0px;
     transition: left 0.3s ease-out;
+    height: 100%;
 }
 
 .nav ul li {
@@ -104,18 +105,18 @@ dl dd {
     display: none;
     position: absolute;
     left: calc(50% - 75px);
-    bottom: 75px;
+    bottom: 125px;
     opacity: 25%;
 }
 
 .nav .regulatory-text {
-    display: none;
+    display: block;
     position: absolute;
     bottom: 0px;
-    font-size: 8px;
+    font-size: 12px;
     color: rgba(218, 195, 148, .25);
     padding: 15px;
-    line-height: 8px;
+    line-height: 12px;
 }
 
 /**************/
@@ -185,6 +186,10 @@ dl dd {
     overflow: auto;
     height: 100%;
     overflow: hidden;
+}
+
+.conversation a {
+    color: rgba(165, 174, 165, 1);
 }
 
 .conversation-window {

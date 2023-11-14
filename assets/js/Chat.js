@@ -21,9 +21,13 @@ export class Chat extends Element
 
         this.conversation = new Element('div', {class: 'inner-conversation'}).add(this.conversationWindow)
 
-        this.regulatory = new Element('a', {href: 'https://utahinnovationoffice.org', class: 'regulatory-container'}).add(this.conversation)
+        this.regulatory = new Element('div', {class: 'regulatory-container'}).add(this.conversation)
 
-        this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png', width: 200}).add(this.regulatory)
+        
+
+        this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png', width: 270}).add(this.regulatory)
+        new Element('br').add(this.regulatory)
+        new Element('a', 'utahinnovationoffice.org', {href: 'https://utahinnovationoffice.org', target: '_blank'}).add(this.regulatory)
         this.controls = new ChatControls(this.app, {model: this.model, onNewMessage: this.onNewMessage.bind(this)}).add(this.root)
         const search = new URLSearchParams(window.location.search)
         

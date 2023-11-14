@@ -15,7 +15,7 @@ class Lighthouse
         if(strtolower($method) === 'get') $path .= '?' . http_build_query($data);
 
         $ch = curl_init();   
-        $url = 'https://' . SELF::ENDPOINT . $path;
+        $url = 'https://' . __LIGHTHOUSE__ . $path;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
