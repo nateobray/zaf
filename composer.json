@@ -1,0 +1,23 @@
+{
+    "name": "zaflegal/zaf",
+    "description": "AI Chat Interface for getting help with your personal injury claims",
+    "type": "project",
+    "require": {
+        "obray/core": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "models\\": "src/models",
+            "controllers\\": "src/controllers",
+            "data\\": "src/data",
+            "views\\": "src/views"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nate Obray",
+            "email": "nathanobray@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

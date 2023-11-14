@@ -1,0 +1,121 @@
+table {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 16px #dfdfdf;
+}
+
+td table {
+    box-shadow: none;
+}
+
+table thead th {
+    text-align: left;
+    font-size: 12px;
+    padding: 8px 8px;
+    color: #333;
+    font-weight: 500;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.tdButton {
+    cursor: pointer;
+}
+
+table tbody td {
+    padding: 8px 8px;
+    font-family: Molde, -apple-system, BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+    font-size: .8em;
+    line-height: 20px;
+    font-weight: 400;
+    color: #333;
+    vertical-align: top;
+    white-space: pre; 
+    word-wrap: break-word;
+}
+
+table tbody td.white-space {
+    white-space: pre-wrap;
+}
+
+table tbody tr:nth-child(even){
+    background-color: #dfdfdf;
+}
+
+table tbody tr:nth-child(odd) .input-group select, table tbody tr:nth-child(odd) .input-group label, table tbody tr:nth-child(odd) .input-group input{
+    background-color: #fff;
+}
+
+
+
+table.clickable tbody tr:hover {
+    background-color: var(--highlight-on-light);
+    cursor: pointer;
+}
+
+table.clickable tbody tr:hover td table {
+    background-color: var(--highlight-on-light);
+}
+
+table tbody tr td table {
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
+table tbody tr td table thead th {
+    font-size: 14px;
+}
+
+table tbody td.controls a{
+    margin-left: 8px;
+}
+
+table tbody td .input-toggle label {
+    display: none;
+}
+
+table tbody td .input-toggle {
+    border: 1px solid transparent;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+table tbody td .input-group .toggle-container {
+    margin: 0px;
+}
+
+.fixed {
+    table-layout: fixed;
+}
+
+.table-overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1000;
+    background: linear-gradient(180deg, rgba(239,239,239,0) 0%, rgba(239,239,239,1) 40%, rgba(239,239,239,1) 100%);
+}
+
+table tbody tr:nth-child(even) .input-group select, table tbody tr:nth-child(even) .input-group input, table tbody tr:nth-child(even) .input-group label{
+    background-color: #dfdfdf;
+}
+
+table tbody .input-group {
+    margin-top: 8px;
+}
+
+table tbody tr td table .btn {
+    font-size: 12px;
+    padding: 8px;
+    margin: 0px;
+}
+
+.table-controls {
+    padding: 0px;
+}

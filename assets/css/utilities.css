@@ -1,0 +1,352 @@
+.grid-auto-columns {
+    display: grid;
+    grid-template-columns: auto;
+    grid-auto-flow: column;
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-5 {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-6 {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-7 {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-8 {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-9 {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-auto-columns-10 {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 0px 8px;
+}
+
+.grid-column-gap {
+    column-gap: 32px;
+}
+
+form.grid-auto-columns-4 div:first-child {
+    grid-column: span 4;
+}
+
+.grid-span-2 {
+    grid-column: span 2;
+}
+
+.grid-span-3 {
+    grid-column: span 3;
+}
+
+.grid-span-4 {
+    grid-column: span 4;
+}
+
+.grid-span-5 {
+    grid-column: span 5;
+}
+
+.grid-span-6 {
+    grid-column: span 6;
+}
+
+.grid-span-7 {
+    grid-column: span 7;
+}
+
+.grid-span-8 {
+    grid-column: span 8;
+}
+
+.grid-span-9 {
+    grid-column: span 9;
+}
+
+.grid-span-10 {
+    grid-column: span 10;
+}
+
+.grid-align-center {
+    justify-self: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+.grid-align-center {
+    align-self: center;
+}
+
+.grid-align-right {
+    justify-self: end;
+}
+
+.success {
+    color: var(--success-dark);
+}
+
+.muted {
+    color: var(--dark-grey);
+}
+
+.error {
+    color: var(--error-dark);
+}
+
+.border {
+    border: 1px solid var(--light-grey);
+}
+
+.border-top {
+    border-top: 1px solid var(--light-grey);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.border-right {
+    border-right: 1px solid var(--light-grey);
+}
+
+.border-left {
+    border-left: 1px solid var(--light-grey);
+}
+
+.pad {
+    padding: 8px;
+}
+
+.pad-lg {
+    padding: 16px;
+}
+
+.pad-left {
+    margin-left: 8px;
+}
+
+.pad-right {
+    margin-right: 8px;
+}
+
+.pad-bottom {
+    margin-bottom: 8px;
+}
+
+.pad-bottom-lg {
+    margin-bottom: 16px;
+}
+
+.pad-top {
+    margin-top: 8px;
+}
+
+.pad-top-lg {
+    margin-top: 16px;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-split {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    column-gap: 10px;
+    width: 100%;
+}
+
+.width00 {
+    width: 10%;
+}
+
+.width10 {
+    width: 10%;
+}
+
+.width20 {
+    width: 10%;
+}
+
+.width30 {
+    width: 30%;
+}
+
+.width40 {
+    width: 40%;
+}
+
+.width50 {
+    width: 50%;
+}
+
+.width60 {
+    width: 60%;
+}
+
+.width70 {
+    width: 70%;
+}
+
+.width80 {
+    width: 80%;
+}
+
+.width90 {
+    width: 90%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.width25px {
+    width: 25px;
+}
+
+.width50px {
+    width: 50px;
+}
+
+.width75px {
+    width: 75px;
+}
+
+.width100px {
+    width: 100px;
+}
+
+.width125px {
+    width: 125px;
+}
+
+.width150px {
+    width: 150px;
+}
+
+.width200px {
+    width: 200px;
+}
+
+.width210px {
+    width: 210px;
+}
+
+.width225px {
+    width: 225px;
+}
+
+.width250px {
+    width: 250px;
+}
+
+.width300px {
+    width: 300px;
+}
+
+.width400px {
+    width: 400px;
+}
+
+.width500px {
+    width: 500px;
+}
+
+.width600px {
+    width: 600px;
+}
+
+.width700px {
+    width: 600px;
+}
+
+.width800px {
+    width: 800px;
+}
+
+.width900px {
+    width: 900px;
+}
+
+.width1000px {
+    width: 1000px;
+}
+
+.widthFull {
+    width: 100%;
+}
+
+.max-width-300 {
+    max-width: 300px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.muted {
+    color: var(--dark-grey);
+}
+
+.overflow-elipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0;
+}
+
+
+
+.float-right {
+    float: right;
+}

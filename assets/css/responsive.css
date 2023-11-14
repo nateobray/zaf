@@ -1,0 +1,44 @@
+@media screen and (max-width: 699px) {
+
+    body {
+        grid-template-columns: 0px auto;
+    }
+
+    .nav {
+        border-right: none;
+    }
+
+    .nav ul, .nav .my-case-nav {
+        z-index: 1000;
+        position: absolute;
+        left: -250px;
+        background-color: rgb(19, 29, 40);
+        height: 100%;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav.open ul, .nav.open .my-case-nav {
+        left: 0px;
+        min-width: 200px;
+    }
+
+    .menu .menu-btn {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .menu .menu-btn:focus, .menu .menu-btn:hover {
+        color:rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
+
+    .nav img {
+        display: inline-block;
+    }
+
+    .nav .regulatory-text {
+        display: block;
+    }
+    
+}
