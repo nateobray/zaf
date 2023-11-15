@@ -40,18 +40,16 @@ export class ChatControls extends Element
         this.status.setHTML('<div class="chat-type-bubble"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>')
     }
 
-    async send(message)
+    async send(message, type='client')
     {
         this.setStatusMessage('Your AI assistant is typing...')
 
-        if(this.props && this.props.onNewMessage) this.props.onNewMessage('client', message)
+        if(this.props && this.props.onNewMessage) this.props.onNewMessage(type, message)
 
         this.text.getRoot().value = ''
         this.text.getRoot().focus();
 
-        const returnMessage = await this.model.send(message, this.onReceiveMessage.bind(this))
-
-        //if(this.app.caseNav) this.app.caseNav.activateAssistant(returnMessage.chat.chat_type_id)
+        const returnMessage = await this.model.send(message, this.onReceiveMessage.bind(this), type)
 
     }
 

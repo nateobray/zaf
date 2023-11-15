@@ -51,18 +51,24 @@ export class App
 
     async authCheck()
     {
+        
         this.template = new Template(this, this.body);
+        const path = this.getRoutablePath()
+        if(this.validateExternalPath(path)){
+            this.session.clear()
+            this.template.setAccount()
+        }
         try {
-            const path = this.getRoutablePath()
+            
             if(!this.validateExternalPath(path)){
                 const response = await this.fetch('/auth/checker/', 'GET')
-                this.session.set('user', response.data)
+                this.session.set('user', response.data) 
             }
             this.template.setAccount()
             this.load(this.getRoutablePath())
         } catch (error) {
-            this.template.setAccount()
             this.session.clear()
+            this.template.setAccount()
             console.log(error)
             console.warn("Not Authorized: redirect to login")
             this.route('/')
@@ -71,7 +77,6 @@ export class App
 
     async load(url=null)
     {
-        
         //document.body.style.cursor = 'wait';
         const params = new URLSearchParams(window.location.search)
         
@@ -102,6 +107,7 @@ export class App
                 this.isTemplateLoaded = true
             }
             this.template.clear()
+            console.log('in app.load')
             this.template.setAccount()
             this.currentView.render(params)
             this.currentView.add(this.template.body)

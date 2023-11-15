@@ -29,11 +29,10 @@ export class LoginForm extends Element
         new Element('button', 'Login to ZAF', {class: 'btn-primary', click: this.form.submit.bind(this.form)}).add(btnContainer)
     }
 
-    async success()
+    async success(e,response)
     {
         this.setHTML('')
         this.app.route('/case')
-        
-        this.app.template.setAccount(true)
+        this.app.session.set('user', response.data.user)    
     }
 }

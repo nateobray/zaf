@@ -117,6 +117,8 @@ export class Chat extends Element
     onNewMessage(type, message)
     {
 
+        if(type == 'system') return;
+
         let name = ''
         switch(this.model.type){
             case 1: name = 'Albert'; break;

@@ -20,6 +20,7 @@ export class Session
 
     clear()
     {
+        console.log('clearing session')
         return sessionStorage.clear();
     }
 

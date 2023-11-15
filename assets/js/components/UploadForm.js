@@ -9,7 +9,6 @@ export class UploadForm extends Element
     constructor(app, props)
     {
         super('div', {class: 'upload-form'})
-        console.log(props)
         this.app = app
         this.props = props
         this.controls = props.controls
@@ -31,7 +30,7 @@ export class UploadForm extends Element
 
     success(e, response)
     {
-        this.controls.send("I upload a document and here is the response:" + JSON.stringify(response.data))
+        this.controls.send("I upload a document and here is the response:" + JSON.stringify(response.data), 'system')
     }
 
 }
