@@ -9,6 +9,7 @@ export class UploadForm extends Element
     constructor(app, props)
     {
         super('div', {class: 'upload-form'})
+        console.log(props)
         this.app = app
         this.props = props
         this.controls = props.controls
@@ -20,7 +21,7 @@ export class UploadForm extends Element
         
         this.form = new Form(this.app, {action: '/chat/upload/', method: 'post', onSuccess: this.success.bind(this)}).add(this.root)
         const fieldset = new Element('fieldset').add(this.form)
-        new Element('legend').setHTML('Upload Bill/Expense Document').add(fieldset)
+        new Element('legend').setHTML('Upload Images/Documents').add(fieldset)
 
         new File(this.app, {label: {text: 'File'}, input: {name: 'file', label: 'File', accept: 'image/*,application/pdf'}}).add(fieldset)
 

@@ -76,7 +76,7 @@ export class ChatControls extends Element
                         break;
                     case 'presentUploadForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new UploadForm(this.app).add(this.chatBubble.content)
+                        new UploadForm(this.app, {controls: this}).add(this.chatBubble.content)
                         break;
                 }
 

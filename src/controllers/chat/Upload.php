@@ -33,7 +33,7 @@ class Upload
         $tmpFile = $files['tmp_name'];
 
         $lh = new Lighthouse();
-        $response = $lh->send(["chat_id"=> $this->session->user->cust_chat->chat_id??null, "tmpFile" =>$tmpFile, "extension" => $extension, "fileType" => $fileType, "fileName" => $fileName, "fileSize" => $fileSize], 'POST', '/v1/customers/cases/CaseDocuments/fromTemp');
+        $response = $lh->send(["session_id"=> session_id(), "tmpFile" =>$tmpFile, "extension" => $extension, "fileType" => $fileType, "fileName" => $fileName, "fileSize" => $fileSize], 'POST', '/v1/customers/cases/CaseDocuments/fromTemp');
 
         $this->data = $response->data;
     }

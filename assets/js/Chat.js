@@ -66,7 +66,7 @@ export class Chat extends Element
                         break;
                     case 'presentUploadForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new UploadForm(this.app).add(chatBubble.content)
+                        new UploadForm(this.app, {controls: this.controls}).add(chatBubble.content)
                         break;
                 }
                 return
