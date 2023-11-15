@@ -75,6 +75,7 @@ export class Chat extends Element
                 new ChatBubble(this.app, "Congratulations, we have successfully verified your email address and activated your account.", {type: 'assistant'}).add(this.conversation)
                 const loginChatBubble = new ChatBubble(this.app, "", {type: "assistant"}).add(this.conversation)
                 new LoginForm(this.app).add(loginChatBubble)
+                this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
             } else {
                 //this.model.send('Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.', 'assistant')
                 new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.", {type: 'assistant'}).add(this.conversation)

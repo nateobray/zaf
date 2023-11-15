@@ -6,13 +6,13 @@ use models\integrations\aws\SES;
 use models\integrations\lighthouse\Lighthouse;
 use models\system\encryption\Crypt;
 use models\system\GUID;
+use models\users\User;
 use models\users\UserActivation;
 use models\users\UserChat;
 use obray\data\Querier;
 use obray\data\types\Password;
 use obray\sessions\Session;
 use obray\users\Permission;
-use obray\users\User;
 
 class Index
 {
@@ -60,7 +60,7 @@ class Index
      * @throws Exception 
      */
 
-    public function post(string $first_name, string $last_name, string $email, string $password, string $password_confirm)
+    public function post(string $first_name, string $last_name, string $email, string $phone, string $password, string $password_confirm, $is_demo = false)
     {
         if($password !== $password_confirm) throw new \Exception("Passwords do not match");
 
@@ -74,7 +74,9 @@ class Index
             'user_last_name' => $last_name,
             'user_email' => $email,
             'user_password' => $password,
-            'user_is_active' => false
+            'user_is_active' => false,
+            'user_phone' => $phone,
+            'user_is_demo' => !empty($is_demo)?true:false
         ]);
         $User->user_id = $this->querier->insert($User)->run();
 
@@ -139,12 +141,18 @@ class Index
 
         $chat = Lighthouse::getChat($UserActivation->user[0]->user_first_name, $UserActivation->user[0]->user_last_name, $session_id);
         
-        $UserChat = new UserChat(...[
-            'user_id' => $UserActivation->user[0]->user_id,
-            'customer_case_id' => $chat->data->customer_case_id,
+        $UserChat = $this->querier->select(UserChat::class)->where([
             'chat_id' => $chat->data->chat_id
-        ]);
-        $UserChat->user_chat_id = $this->querier->insert($UserChat)->run();
+        ])->limit(1)->run();
+        if(empty($UserChat)){
+            $UserChat = new UserChat(...[
+                'user_id' => $UserActivation->user[0]->user_id,
+                'customer_case_id' => $chat->data->customer_case_id,
+                'chat_id' => $chat->data->chat_id
+            ]);
+            $UserChat->user_chat_id = $this->querier->insert($UserChat)->run();
+        }
+        
 
         // indicate succces
         return $this->data = "success";

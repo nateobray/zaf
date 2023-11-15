@@ -34,7 +34,7 @@ export class SignupForm extends Element
         new Input(this.model, {label: {text: 'Phone'}, input: {name: 'phone'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Password'}, input: {name: 'password', type: 'password'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Confirm Password'}, input: {name: 'password_confirm', type: 'password'}}).add(fieldset);
-        new Check(this.model, {label: {text: 'I don\'t have a real case, I just want to check things out'}, input: {name: 'account_type'}}).add(fieldset);
+        new Check(this.model, {label: {text: 'I don\'t have a real case, I just want to check things out'}, input: {name: 'is_demo'}}).add(fieldset);
 
         const btnContainer = new Element('div', {class: 'btn-container'}).add(fieldset)
         new Element('button', 'Create Account', {class: 'btn-primary', click: this.form.submit.bind(this.form)}).add(btnContainer)
