@@ -55,11 +55,11 @@ export default class DataChat
         if(url instanceof URL){
             urlObj = url
             urlObj.protocol = 'https'
-            urlObj.host = 'zaf-dev.obray.net'
+            urlObj.host = 'zaflegal.com'
 
         // allow url parameter as a string
         } else {
-            urlObj = new URL(url, 'https://' + 'zaf-dev.obray.net')
+            urlObj = new URL(url, 'https://' + 'zaflegal.com')
         }
 
         // get our URL as a string
