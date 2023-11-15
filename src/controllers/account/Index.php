@@ -98,7 +98,7 @@ class Index
         $SES = new SES(__AWS_ACCESS_KEY_ID__, __AWS_SECRET_ACCESS_KEY__, __AWS_REGION__);
         $SES->sendEmail(
             [$email],
-            'nathanobray@gmail.com',
+            'noreply@zaflegal.com',
             $html,
             "Welcome to ZAF!"
         );

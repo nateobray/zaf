@@ -6,6 +6,7 @@ export default class DataChat
     {
         this.type = type
         console.log(this.type)
+        this.host = window.location.hostname
     }
 
     async send(message, fn, type = 'client')
@@ -55,20 +56,15 @@ export default class DataChat
         if(url instanceof URL){
             urlObj = url
             urlObj.protocol = 'https'
-            urlObj.host = 'zaflegal.com'
+            urlObj.host = this.endpoint.replace('https://').replace('http://')
 
         // allow url parameter as a string
         } else {
-            urlObj = new URL(url, 'https://' + 'zaflegal.com')
+            urlObj = new URL(url, 'https://' + this.host)
         }
 
         // get our URL as a string
         url = urlObj.toString()
-
-        // if we're passing session by URL, append to every request
-        if(localStorage.getItem('sessionId')!=null){
-            urlObj.searchParams.add('PHPSESSID', localStorage.getItem('sessionId'));
-        }
 
         // setup fetch params
         let fetchParams = {
@@ -88,7 +84,6 @@ export default class DataChat
         }
         if(data !== null) fetchParams.body = data
 
-        console.log(url)
         return fetch(url, fetchParams)
             .then(response => {
                 if (response.ok) return response.json();
@@ -109,5 +104,6 @@ export default class DataChat
             .then(response => {     
                 return response;
             })
+            
     }
 }

@@ -39,6 +39,7 @@ export class App
     {
         
         const validExternalPaths = [
+            '', // prevents redirect on root path back to root path when validation fails
             'login',
             'services',
             'pricing',
