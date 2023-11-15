@@ -30,10 +30,10 @@ export default class CaseNav extends Element
         new Element('h4', 'My Team').add(this.caseProgress)
 
         this.genericAssistant = new Element('div', '&nbsp; Albert', {class: 'progress-item active', click: function(){}}).add(this.caseProgress)
-        this.accidentAssistant = new Element('div', '&nbsp; Accident Info Ava', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
         this.injuryAssistant = new Element('div', '&nbsp; Injury Emily', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
         this.treatmentAssistant = new Element('div', '&nbsp; Treatment Traci ', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
         this.damagesAssistant = new Element('div', '&nbsp; Loss Tracker Logan ', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
+        this.accidentAssistant = new Element('div', '&nbsp; Accident Info Ava', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
         this.settlementAssistant = new Element('div', '&nbsp; Tally ', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
 
         this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png',  width: 150}).add(this.root)

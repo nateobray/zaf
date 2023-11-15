@@ -103,15 +103,15 @@ export class ChatControls extends Element
             this.currentArgs += message.choices[0].delta.function_call.arguments
         }
 
-        if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.chat_type_id){
-            this.model.type = message.choices[0].delta.chat_type_id
-            this.app.caseNav.activateAssistant(message.choices[0].delta.chat_type_id)
-        }
-
         if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.content){
             if(!this.chatBubble && message.choices[0].delta.content != '') this.chatBubble = this.props.onNewMessage('assistant', '')
             this.chatBubble.content.getRoot().innerHTML += message.choices[0].delta.content
             this.chatBubble.conversationWindow.getRoot().scrollTop = this.chatBubble.conversationWindow.getRoot().scrollHeight;
+        }
+
+        if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.chat_type_id){
+            this.model.type = message.choices[0].delta.chat_type_id
+            this.app.caseNav.activateAssistant(message.choices[0].delta.chat_type_id)
         }
         
     }

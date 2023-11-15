@@ -78,7 +78,7 @@ export class Chat extends Element
                 this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
             } else {
                 //this.model.send('Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.', 'assistant')
-                new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.", {type: 'assistant'}).add(this.conversation)
+                new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up and just need to login or you need to create an account.", {type: 'assistant'}).add(this.conversation)
             }
         }
 
