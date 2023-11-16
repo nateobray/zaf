@@ -20,6 +20,10 @@ export class UploadForm extends Element
     async render()
     {
         
+        if(!this.props.type){
+            new Element('div', '<div class="align-center"><br/><i class="fa-solid fa-triangle-exclamation fa-2xl"></i><br/><br/> <strong>Upload Form Expired</strong></div> <p>This form has expired.  If you need to upload a file request a new form.</p>', {class: 'form-complete'}).add(this.root)
+            return;
+        }
         this.form = new Form(this.app, {action: '/chat/upload/', method: 'post', onSuccess: this.success.bind(this), onError: this.onError.bind(this)}).add(this.root)
         const fieldset = new Element('fieldset').add(this.form)
         new Element('legend').setHTML('Upload Images/Documents').add(fieldset)

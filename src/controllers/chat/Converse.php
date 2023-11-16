@@ -49,7 +49,7 @@ class Converse
         if($type === 'client') $role = 'user';
         try {
             $lh = new Lighthouse();
-            $response = $lh->sendReceiveChunks('/v1/chatbot/chat/message/?session_id=' . session_id() . '&message=' . urlencode($message) . '&chat_type_id=' . $AIType, function($ch, $str) {
+            $response = $lh->sendReceiveChunks('/v1/chatbot/chat/message/?session_id=' . session_id() . '&message=' . urlencode($message) . '&type=' . $role . '&chat_type_id=' . $AIType, function($ch, $str) {
             
                 echo $str;
                 if (ob_get_length() > 0) ob_flush();
