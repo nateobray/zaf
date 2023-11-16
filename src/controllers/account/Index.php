@@ -62,6 +62,14 @@ class Index
 
     public function post(string $first_name, string $last_name, string $email, string $phone, string $password, string $password_confirm, $is_demo = false)
     {
+
+        if(empty($first_name)) throw new \Exception("First name is required.");
+        if(empty($last_name)) throw new \Exception("Last name is required.");
+        if(empty($email)) throw new \Exception("Email is required.");
+        if(empty($phone)) throw new \Exception("Phone is required.");
+        if(empty($password)) throw new \Exception("Password is required.");
+        if(empty($password_confirm)) throw new \Exception("Password Confirm is required.");
+
         if($password !== $password_confirm) throw new \Exception("Passwords do not match");
 
         // hash and encrypt password
