@@ -20,7 +20,7 @@ class Upload
         $this->session = $session;
     }
 
-    public function post()
+    public function post(string $document_type)
     {
         if(empty($_FILES)) throw new \Exception("No files selected.");
         $files = $_FILES['file'];
@@ -33,7 +33,7 @@ class Upload
         $tmpFile = $files['tmp_name'];
 
         $lh = new Lighthouse();
-        $response = $lh->send(["session_id"=> session_id(), "tmpFile" =>$tmpFile, "extension" => $extension, "fileType" => $fileType, "fileName" => $fileName, "fileSize" => $fileSize], 'POST', '/v1/customers/cases/CaseDocuments/fromTemp');
+        $response = $lh->send(["session_id"=> session_id(), "tmpFile" =>$tmpFile, "extension" => $extension, "fileType" => $fileType, "fileName" => $fileName, "fileSize" => $fileSize, "document_type" => $document_type], 'POST', '/v1/customers/cases/CaseDocuments/fromTemp');
 
         $this->data = $response->data;
     }

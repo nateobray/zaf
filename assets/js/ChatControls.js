@@ -62,25 +62,27 @@ export class ChatControls extends Element
             
             if(this.currentFn){
                 
-                console.log("function call", this.currentFn)
+                this.currentArgs = JSON.parse(this.currentArgs)
+                console.log("function call", this.currentFn, this.currentArgs)
                 switch(this.currentFn){
                     case 'presentSignupForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new SignupForm(this.app).add(this.chatBubble.content)
+                        new SignupForm(this.app, this.currentArgs).add(this.chatBubble.content)
                         break;
                     case 'presentLoginForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new LoginForm(this.app).add(this.chatBubble.content)
+                        new LoginForm(this.app, this.currentArgs).add(this.chatBubble.content)
                         break;
                     case 'presentUploadForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new UploadForm(this.app, {controls: this}).add(this.chatBubble.content)
+                        new UploadForm(this.app, {...this.currentArgs, ...{controls: this}}).add(this.chatBubble.content)
                         break;
                 }
 
             }
             this.currentFn = null;
             this.currentArgs = '';
+            
             this.chatBubble = null
             
             return

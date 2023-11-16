@@ -21,7 +21,7 @@ class Index
     {
         $this->html = '<html>
             <head>
-                <title>ZAF - Personal Injury</title>
+                <title>ZAF - Personal Injury, Zero Attorney Fees</title>
                 <link rel="stylesheet" href="/assets/css/style.css">
                 <link rel="stylesheet" href="/assets/css/all.min.css">
                 <script type="module" src="/assets/js/App.js"></script>

@@ -59,6 +59,7 @@ export class Form extends Element
             if(this.props.onSuccess !== undefined) this.props.onSuccess(e, response)
         } catch (error) {
             errorMessage = '<i class="fa-solid fa-triangle-exclamation"></i> ' + error.message
+            if(this.props.onError) this.props.onError(e, error.message)
         }
 
         if(successMessage !== null){

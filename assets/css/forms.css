@@ -1,4 +1,28 @@
 
+form {
+    position: relative;
+}
+
+.form-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    display: flex;
+    align-items: center; /* This vertically centers the child in the container */
+    justify-content: center;
+}
+
+.form-overlay div {
+    position: relative;
+    margin: auto auto;
+    color: rgba(231, 0, 76, 1);
+}
+
 .input-group {
     display: grid;
     grid-template-columns: auto;
