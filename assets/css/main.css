@@ -161,12 +161,15 @@ dl dd {
 
 .menu {
     display: grid;
+    grid-template-columns: auto;
     color: rgba(165, 174, 165, .66);
     padding: 16px;
-    width: 55px;
+    min-width: 185px;
+    padding-left: 0px;
 }
 
 .menu .menu-btn {
+    display: none;
     padding: 8px 12px;
     border: 1px solid rgba(165, 174, 165, .66);
     border-radius: 4px;
@@ -174,6 +177,18 @@ dl dd {
     align-self: center;
     opacity: 0;
     transition: opacity 0.3s ease-out;
+}
+
+.menu a {
+    margin: auto;
+    padding: 15px;
+    color: rgb(0, 150, 100);
+    text-decoration: none;
+}
+
+.menu a .phone-action {
+    display: inline-block;
+    
 }
 
 /********************/

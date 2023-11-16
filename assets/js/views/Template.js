@@ -25,10 +25,13 @@ export class Template
         new Element('img', {src: 'assets/images/zaf-logo.png', alt: 'ZAF Logo', class: 'logo'}).add(this.header)
         new Element('div', 'BETA', {class: 'beta'}).add(this.header)
 
+        
+
         this.setAccount()
 
         // menu btn
-        this.menuBtn = new Element('btn', '<i class="fa-solid fa-bars"></i>', {class: 'menu-btn', tabindex: 1000}).add(menu)
+        this.menuBtn = new Element('button', '<i class="fa-solid fa-bars"></i>', {class: 'menu-btn', tabindex: 1000}).add(menu)
+        new Element('a', '<i class="fa-solid fa-phone fa-lg"></i> &nbsp; <span class="phone-action">801-255-2102</span>', {href: 'tel:801-255-2102'}).add(menu)
     }
 
     async logout()
