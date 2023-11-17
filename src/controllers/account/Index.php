@@ -35,14 +35,6 @@ class Index
         $this->session = $session;
     }
 
-    public function testEmail()
-    {
-        $url = "https://".__DOMAIN__."/?code=".$UserActivation->user_activation_code;
-        $domain = __DOMAIN__;
-        include __BASE_DIR__ . 'src/views/email/verify-email.phtml';
-        exit();
-    }
-
     /**
      * post
      * 
@@ -112,6 +104,23 @@ class Index
             $html,
             "Welcome to ZAF!"
         );
+
+
+        try {
+            $lh = new Lighthouse();
+            $response = $lh->send([
+                'session_id' => session_id(),
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+                'phone' => $phone,
+                'is_demo' => !empty($is_demo)?true:false
+            ], 'GET', '/v1/chatbot/chat/updateCustomer');
+            $this->data = $response->data;
+        } catch (\Throwable $e){
+            $this->data = $e->getMessage();
+        }
+
         $this->data = "success";
     }
 
@@ -146,6 +155,15 @@ class Index
         // activate user activation
         $UserActivation->user_activation_is_activated = true;
         $this->querier->update($UserActivation)->run();
+
+        try {
+            $lh = new Lighthouse();
+            $response = $lh->send([
+                'session_id' => session_id()
+            ], 'GET', '/v1/chatbot/chat/activateCustomer');
+        } catch (\Throwable $e){
+            $e->getMessage();
+        }
 
         $chat = Lighthouse::getChat($UserActivation->user[0]->user_first_name, $UserActivation->user[0]->user_last_name, $session_id);
         
