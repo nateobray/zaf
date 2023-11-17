@@ -44,6 +44,10 @@ export default class ExternalNav extends Element
 
     async pricing()
     {
+        setTimeout(function(){
+            this.app.template.closeMenu()   
+        }.bind(this), 150)
+        
         this.chat.onNewMessage('client', 'How much does ZAF cost?')
         this.chat.controls.setStatusMessage()
         setTimeout(function(){
@@ -55,6 +59,9 @@ export default class ExternalNav extends Element
 
     async send(message, e)
     {
+        setTimeout(function(){
+            this.app.template.closeMenu()   
+        }.bind(this), 150)
         e.preventDefault()
         e.stopPropagation()
         if(this.chat) this.chat.controls.send(message)

@@ -105,7 +105,6 @@ class Index
             "Welcome to ZAF!"
         );
 
-
         try {
             $lh = new Lighthouse();
             $response = $lh->send([
