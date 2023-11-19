@@ -43,7 +43,9 @@ export class SignupForm extends Element
     async success()
     {
         this.storage.setItem('isAccountCreated', true)
-        console.log("Hello world\n")
+        gtag("event", "sign_up", {
+            method: "Google"
+        });
         this.setHTML('')
         new Element('div', '<div class="align-center"><br/><i class="fa-solid fa-circle-check fa-xl"></i><br/><br/> <strong>Email Verfication Sent</strong></div> <p>We\'ve sent you an email with a link you need to click to verify your email and access your account.</p>', {class: 'form-complete'}).add(this.root)
     }

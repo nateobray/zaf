@@ -32,6 +32,9 @@ export class LoginForm extends Element
     async success(e,response)
     {
         this.setHTML('')
+        gtag("event", "login", {
+            method: "login-form"
+        });
         this.app.route('/case')
         this.app.session.set('user', response.data.user)    
     }

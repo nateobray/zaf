@@ -122,6 +122,15 @@ export class ChatControls extends Element
         e.stopPropagation()
 
         const message = this.text.getRoot().value
+
+        let ai = 'unknown'
+        const ais = ['unknown', 'sign-up', 'builder', 'generic', 'accident', 'injuries', 'treatments', 'damages', 'insurance', 'claims', 'settlement']
+        if(ais[this.model.type]) ai = ais[this.model.type]
+        
+        gtag("event", "chat", {
+            method: "chat-send",
+            ai: ai
+        });
         
         this.send(message)
     }
