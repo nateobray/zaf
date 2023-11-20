@@ -44,7 +44,7 @@ class Lighthouse
     public function sendReceiveChunks(string $path, $callback)
     {
         $ch = curl_init();   
-        $url = 'https://' . SELF::ENDPOINT . $path . '&session_id=' . session_id();
+        $url = 'https://' . __LIGHTHOUSE__ . $path . '&session_id=' . session_id();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
