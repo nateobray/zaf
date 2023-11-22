@@ -90,6 +90,20 @@ class Index
         ]);
         $UserActivation->user_activation_id = $this->querier->insert($UserActivation)->run();
 
+        $chat = Lighthouse::getChat($first_name, $last_name, session_id());
+        
+        $UserChat = $this->querier->select(UserChat::class)->where([
+            'customer_case_id' => $chat->data->customer_case_id
+        ])->limit(1)->run();
+        if(empty($UserChat)){
+            $UserChat = new UserChat(...[
+                'user_id' => $User->user_id,
+                'customer_case_id' => $chat->data->customer_case_id,
+                'chat_id' => $chat->data->chat_id
+            ]);
+            $UserChat->user_chat_id = $this->querier->insert($UserChat)->run();
+        }
+
         $url = "https://".__DOMAIN__."/?code=".$UserActivation->user_activation_code;
         $domain = __DOMAIN__;
         ob_start();
