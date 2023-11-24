@@ -7,7 +7,7 @@ import { Input } from "./forms/Input.js";
 
 export class UploadForm extends Element
 {
-    constructor(app, props)
+    constructor(app, controls, props)
     {
         super('div', {class: 'upload-form'})
         this.app = app

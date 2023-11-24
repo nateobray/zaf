@@ -5,7 +5,7 @@ import { Input } from "./forms/Input.js";
 
 export class LoginForm extends Element
 {
-    constructor(app, props)
+    constructor(app, controls, props)
     {
         super('div', {class: 'login'})
         this.props = props

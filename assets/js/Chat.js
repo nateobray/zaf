@@ -49,6 +49,7 @@ export class Chat extends Element
         const chat = await this.model.init()
         this.model.type = chat.chat_type_id
         console.log('model', this.model)
+        let lastChatBubble = null
         chat.messages.forEach( message => {
             
             let chatBubble = null
@@ -58,36 +59,47 @@ export class Chat extends Element
                 switch(message.name){
                     case 'presentSignupForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new SignupForm(this.app).add(chatBubble.content)
+                        new SignupForm(this.app, this.controls).add(chatBubble.content)
                         break;
                     case 'presentLoginForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new LoginForm(this.app).add(chatBubble.content)
+                        new LoginForm(this.app, this.controls).add(chatBubble.content)
                         break;
                     case 'presentUploadForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new UploadForm(this.app, {controls: this.controls}).add(chatBubble.content)
+                        new UploadForm(this.app, this.controls, {controls: this.controls}).add(chatBubble.content)
                         break;
                 }
                 return
             }
             let type = 'assistant'
             if(message.role == 'user') type = 'client'
-            this.onInitMessage(type, message.content)
+            lastChatBubble = this.onInitMessage(type, message.content)
         })
         this.controls.clearStatusMessage();
 
         if(search.has('code')){
-            const response = await this.model.activate(search.get('code'))
-            //console.log(response)
-            if(response === 'success') {
-                new ChatBubble(this.app, "Congratulations, we have successfully verified your email address and activated your account.", {type: 'assistant'}).add(this.conversation)
-                const loginChatBubble = new ChatBubble(this.app, "", {type: "assistant"}).add(this.conversation)
-                new LoginForm(this.app).add(loginChatBubble)
-                this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
-            } else {
-                //this.model.send('Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.', 'assistant')
-                new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up and just need to login or you need to create an account.", {type: 'assistant'}).add(this.conversation)
+            if(this.lastCharacterMessage) this.lastCharacterMessage.remove()
+            if(lastChatBubble) lastChatBubble.remove()
+            try {
+                const response = await this.model.activate(search.get('code'))
+                //console.log(response)
+                if(response === 'success') {
+                    gtag("event", "login", {
+                        method: "account-activated"
+                    });
+                    this.controls.send("Client has successfully verfied their email address.  Please let them know and help them get logged in by presenting the login form.", "system")
+                    //this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
+                } else {
+                    gtag("event", "login", {
+                        method: "account-already-activated"
+                    });
+                    this.controls.send("Client attempted to verify their email address again.  Please inform them that their account is already activated and help them get logged in.", "system")
+                    //this.model.send('Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.', 'assistant')
+                    //new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up and just need to login or you need to create an account.", {type: 'assistant'}).add(this.conversation)
+                }
+            } catch (err){
+                this.controls.send("Client attempted to verify their email address again.  Please inform them that their account is already activated and help them get logged in.", "system")
             }
         }
 
@@ -108,7 +120,7 @@ export class Chat extends Element
             case 10: name = 'Tally'; break;
         }
 
-        if(name && type == 'assistant') new Element('div', name, {class: 'character-'+type}).add(this.conversation)
+        if(name && type == 'assistant') this.lastCharacterMessage = new Element('div', name, {class: 'character-'+type}).add(this.conversation)
         const chatBubble = new ChatBubble(this.app, message, {type: type, controls: this.controls}).add(this.conversation)
         this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
         return chatBubble
@@ -130,7 +142,7 @@ export class Chat extends Element
             case 10: name = 'Tally'; break;
         }
 
-        if(name && type == 'assistant') new Element('div', name, {class: 'character-'+type}).add(this.conversation)
+        if(name && type == 'assistant') this.lastCharacterMessage = new Element('div', name, {class: 'character-'+type}).add(this.conversation)
         const chatBubble = new ChatBubble(this.app, message, {type: type, controls: this.controls}).add(this.conversation)
         chatBubble.conversationWindow = this.conversationWindow
         this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;

@@ -6,9 +6,11 @@ import { Input } from "./forms/Input.js";
 
 export class SignupForm extends Element
 {
-    constructor(props)
+    constructor(app, controls, props)
     {
         super('div', {class: 'signup'})
+        this.app = app
+        this.controls = controls
         this.props = props
         this.model = new DataChat()
         this.storage = window.localStorage;
@@ -20,11 +22,13 @@ export class SignupForm extends Element
     async render()
     {
         if(this.isAccountCreated) {
-            this.success()
+            this.success(false)
             return
         }
 
-        this.form = new Form(this.model, {action: '/account/', method: 'post', onSuccess: this.success.bind(this)}).add(this.root)
+        console.log(this.controls)
+
+        this.form = new Form(this.model, {action: '/account/', method: 'post', onSuccess: this.success.bind(this, true)}).add(this.root)
         const fieldset = new Element('fieldset').add(this.form)
         new Element('legend').setHTML('Create ZAF Account').add(fieldset)
 
@@ -40,7 +44,7 @@ export class SignupForm extends Element
         new Element('button', 'Create Account', {class: 'btn-primary', click: this.form.submit.bind(this.form)}).add(btnContainer)
     }
 
-    async success()
+    async success(sendMessage)
     {
         this.storage.setItem('isAccountCreated', true)
         gtag("event", "sign_up", {
@@ -48,5 +52,9 @@ export class SignupForm extends Element
         });
         this.setHTML('')
         new Element('div', '<div class="align-center"><br/><i class="fa-solid fa-circle-check fa-xl"></i><br/><br/> <strong>Email Verfication Sent</strong></div> <p>We\'ve sent you an email with a link you need to click to verify your email and access your account.</p>', {class: 'form-complete'}).add(this.root)
+        if(sendMessage){
+            
+            this.controls.send('Client has successfully signed up. Please let them know that they need to check their email and click on the link to verify their email address so they can login and continue their case.', 'system')
+        }
     }
 }

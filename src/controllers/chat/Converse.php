@@ -47,6 +47,7 @@ class Converse
         
         $role = 'assistant';
         if($type === 'client') $role = 'user';
+        if($type === 'system') $role = 'system';
         try {
             $lh = new Lighthouse();
             $response = $lh->sendReceiveChunks('/v1/chatbot/chat/message/?session_id=' . session_id() . '&message=' . urlencode($message) . '&type=' . $role . '&chat_type_id=' . $AIType, function($ch, $str) {

@@ -159,7 +159,10 @@ class Index
             ->run();
 
         // check if user activation exists
-        if(empty($UserActivation)) throw new \Exception("Invalid activation code");
+        if(empty($UserActivation)){
+            $this->data = "failed";
+            return;
+        } 
 
         // activate user
         $UserActivation->user[0]->user_is_active = true;

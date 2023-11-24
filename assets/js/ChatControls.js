@@ -49,6 +49,10 @@ export class ChatControls extends Element
         this.text.getRoot().value = ''
         this.text.getRoot().focus();
 
+        gtag("event", "chat", {
+            method: "chat-send"
+        });
+
         const returnMessage = await this.model.send(message, this.onReceiveMessage.bind(this), type)
 
     }
@@ -67,15 +71,15 @@ export class ChatControls extends Element
                 switch(this.currentFn){
                     case 'presentSignupForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new SignupForm(this.app, this.currentArgs).add(this.chatBubble.content)
+                        new SignupForm(this.app, this, this.currentArgs).add(this.chatBubble.content)
                         break;
                     case 'presentLoginForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new LoginForm(this.app, this.currentArgs).add(this.chatBubble.content)
+                        new LoginForm(this.app, this, this.currentArgs).add(this.chatBubble.content)
                         break;
                     case 'presentUploadForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
-                        new UploadForm(this.app, {...this.currentArgs, ...{controls: this}}).add(this.chatBubble.content)
+                        new UploadForm(this.app, this, {...this.currentArgs, ...{controls: this}}).add(this.chatBubble.content)
                         break;
                 }
 
@@ -126,11 +130,6 @@ export class ChatControls extends Element
         let ai = 'unknown'
         const ais = ['unknown', 'sign-up', 'builder', 'generic', 'accident', 'injuries', 'treatments', 'damages', 'insurance', 'claims', 'settlement']
         if(ais[this.model.type]) ai = ais[this.model.type]
-        
-        gtag("event", "chat", {
-            method: "chat-send",
-            ai: ai
-        });
         
         this.send(message)
     }
