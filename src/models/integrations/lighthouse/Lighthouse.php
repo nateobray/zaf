@@ -25,7 +25,7 @@ class Lighthouse
         if(strtolower($method) === 'post') curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         
         $response = curl_exec($ch);
-        
+
         $info = curl_getinfo($ch);
         return json_decode($response);
     }

@@ -35,6 +35,10 @@ class Upload
         $lh = new Lighthouse();
         $response = $lh->send(["session_id"=> session_id(), "tmpFile" =>$tmpFile, "extension" => $extension, "fileType" => $fileType, "fileName" => $fileName, "fileSize" => $fileSize, "document_type" => $document_type], 'POST', '/v1/customers/cases/CaseDocuments/fromTemp');
 
+        if(!empty($response->error)){
+            throw new \Exception($response->error);
+        }
+
         $this->data = $response->data;
     }
 }

@@ -101,10 +101,10 @@ export class ChatControls extends Element
 
         const message = JSON.parse(e.data)
 
-        if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.function_call ){
+        if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.tool_calls ){
             
-            if(message.choices[0].delta.function_call.name) this.currentFn = message.choices[0].delta.function_call.name
-            this.currentArgs += message.choices[0].delta.function_call.arguments
+            if(message.choices[0].delta.tool_calls[0].function.name) this.currentFn = message.choices[0].delta.tool_calls[0].function.name
+            this.currentArgs += message.choices[0].delta.tool_calls[0].function.arguments
         }
 
         if(message && message.choices && message.choices.length > 0 && message.choices[0].delta && message.choices[0].delta.content){
