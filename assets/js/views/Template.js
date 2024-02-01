@@ -31,7 +31,7 @@ export class Template
 
         // menu btn
         this.menuBtn = new Element('button', '<i class="fa-solid fa-bars"></i>', {class: 'menu-btn', tabindex: 1000}).add(menu)
-        new Element('a', '<i class="fa-solid fa-phone fa-lg"></i> &nbsp; <span class="phone-action">801-255-2102</span>', {href: 'tel:801-255-2102'}).add(menu)
+        new Element('a', '<i class="fa-solid fa-phone fa-lg"></i> &nbsp; <span class="phone-action">801-346-0080</span>', {href: 'tel:801-346-0080'}).add(menu)
     }
 
     async logout()
