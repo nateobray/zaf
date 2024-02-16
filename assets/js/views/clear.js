@@ -9,7 +9,7 @@ export default class Clear extends View
     constructor(app, props)
     {
         super(app, props)
-        window.setcookie("PHPSESSID", "", time() - 3600, "/");
+        document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         this.session.clear()
     }
 
