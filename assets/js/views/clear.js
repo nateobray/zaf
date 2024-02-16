@@ -13,7 +13,6 @@ export default class Clear extends View
         localStorage.clear()
 
         new Element('br').add(this.root)
-        new Element('br').add(this.root)
         new Element('h1', 'Session Cleared', { class: 'align-center'}).add(this.root)
     }
 
