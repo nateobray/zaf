@@ -43,7 +43,8 @@ export class App
             'login',
             'services',
             'pricing',
-            'about'
+            'about',
+            'clear'
         ];
 
         return validExternalPaths.includes(path.replace(/^\/|\/$/g, '')); 
