@@ -12,9 +12,7 @@ export default class Clear extends View
         document.cookie = "PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         localStorage.clear()
 
-        new Element('br').add(this.root)
-        new Element('br').add(this.root)
-        new Element('h1', 'Session Cleared').add(this.root)
+        new Element('h1', 'Session Cleared', { class: 'align-center'}).add(this.root)
     }
 
     nav(template)
