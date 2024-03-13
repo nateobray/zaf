@@ -26,8 +26,6 @@ export class SignupForm extends Element
             return
         }
 
-        console.log(this.controls)
-
         this.form = new Form(this.model, {action: '/account/', method: 'post', onSuccess: this.success.bind(this, true)}).add(this.root)
         const fieldset = new Element('fieldset').add(this.form)
         new Element('legend').setHTML('Create ZAF Account').add(fieldset)
@@ -35,6 +33,7 @@ export class SignupForm extends Element
         new Input(this.model, {label: {text: 'First Name'}, input: {name: 'first_name'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Last Name'}, input: {name: 'last_name'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Email'}, input: {name: 'email'}}).add(fieldset);
+        //new Check(this.model, {label: {text: 'You may contact me via text message or phone call'}, input: {name: 'can_call'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Phone'}, input: {name: 'phone'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Password'}, input: {name: 'password', type: 'password'}}).add(fieldset);
         new Input(this.model, {label: {text: 'Confirm Password'}, input: {name: 'password_confirm', type: 'password'}}).add(fieldset);
@@ -47,9 +46,11 @@ export class SignupForm extends Element
     async success(sendMessage)
     {
         this.storage.setItem('isAccountCreated', true)
+        /**
         gtag("event", "sign_up", {
             method: "Google"
         });
+         */
         this.setHTML('')
         new Element('div', '<div class="align-center"><br/><i class="fa-solid fa-circle-check fa-xl"></i><br/><br/> <strong>Email Verfication Sent</strong></div> <p>We\'ve sent you an email with a link you need to click to verify your email and access your account.</p>', {class: 'form-complete'}).add(this.root)
         if(sendMessage){

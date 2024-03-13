@@ -183,4 +183,10 @@ export class Element
         this.root.className = classList.join(' ')
         return this
     }
+
+    toggleClass(className)
+    {
+        this.getRoot().classList.toggle(className)
+        return this
+    }
 }

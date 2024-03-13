@@ -49,9 +49,11 @@ export class ChatControls extends Element
         this.text.getRoot().value = ''
         this.text.getRoot().focus();
 
+        /**
         gtag("event", "chat", {
             method: "chat-send"
         });
+         */
 
         const returnMessage = await this.model.send(message, this.onReceiveMessage.bind(this), type)
 

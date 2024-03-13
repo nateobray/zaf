@@ -9,12 +9,13 @@ import { UploadForm } from "./components/UploadForm.js"
 export class Chat extends Element
 {
     
-    constructor(app, props)
+    constructor(app, message = '', props)
     {
         super('div', {class: 'conversation'})
         
         this.props = props
         this.app = app
+        this.message = message
         this.model = new DataChat((this.props&&this.props.type)?this.props.type:1)
 
         this.conversationWindow = new Element('div', {class: 'conversation-window'}).add(this.root)
@@ -29,7 +30,6 @@ export class Chat extends Element
         this.controls = new ChatControls(this.app, {model: this.model, onNewMessage: this.onNewMessage.bind(this)}).add(this.root)
         const search = new URLSearchParams(window.location.search)
 
-        
         addEventListener("resize", (event) => {
             this.resize()
         });
@@ -78,6 +78,11 @@ export class Chat extends Element
         })
         this.controls.clearStatusMessage();
 
+        if(search.has('message') && this.message != ''){
+            this.controls.send(this.message, "client")
+            return
+        }
+
         if(search.has('code')){
             if(this.lastCharacterMessage) this.lastCharacterMessage.remove()
             if(lastChatBubble) lastChatBubble.remove()
@@ -85,15 +90,19 @@ export class Chat extends Element
                 const response = await this.model.activate(search.get('code'))
                 //console.log(response)
                 if(response === 'success') {
+                    /***
                     gtag("event", "login", {
                         method: "account-activated"
                     });
-                    this.controls.send("Client has successfully verfied their email address.  Please let them know and help them get logged in by presenting the login form.", "system")
+                     */
+                    this.controls.send("Client has successfully verfied their email address.  Please let them know and help them get logged in by calling the presentLoginForm function to present the login form to the user.", "system")
                     //this.conversationWindow.getRoot().scrollTop = this.conversationWindow.getRoot().scrollHeight;
                 } else {
+                    /***
                     gtag("event", "login", {
                         method: "account-already-activated"
                     });
+                     */
                     this.controls.send("Client attempted to verify their email address again.  Please inform them that their account is already activated and help them get logged in.", "system")
                     //this.model.send('Sorry, we didn\t recognize your email verification code.  Either you have already signed up or or should try to do so again.', 'assistant')
                     //new ChatBubble(this.app, "Sorry, we didn\t recognize your email verification code.  Either you have already signed up and just need to login or you need to create an account.", {type: 'assistant'}).add(this.conversation)

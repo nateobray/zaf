@@ -4,6 +4,7 @@ import { File } from "./forms/File.js";
 import { Hidden } from "./forms/Hidden.js";
 import { Form } from "./forms/Form.js";
 import { Input } from "./forms/Input.js";
+import { Select } from "./forms/Select.js";
 
 export class UploadForm extends Element
 {
@@ -27,6 +28,16 @@ export class UploadForm extends Element
         this.form = new Form(this.app, {action: '/chat/upload/', method: 'post', onSuccess: this.success.bind(this), onError: this.onError.bind(this)}).add(this.root)
         const fieldset = new Element('fieldset').add(this.form)
         new Element('legend').setHTML('Upload Images/Documents').add(fieldset)
+        //"injury photo", "disfigurement photo", "accident photo", "incident report", "police report"
+        const documentTypeOptions = [
+            {label: 'Injury Photo', value: 'injury photo'},
+            {label: 'Disfigurement Photo', value: 'disfigurement photo'},
+            {label: 'Accident Photo', value: 'accident photo'},
+            {label: 'Incident Report', value: 'incident report'},
+            {label: 'Police Report', value: 'police report'},
+            {label: 'Drivers Info Exchange', value: 'drivers info exchange'},
+        ]
+        new Select(this.app,  {values: documentTypeOptions, label: {text: 'Select Type of File'}, input: {name: 'document_type', value: this.props.type}})
 
         new File(this.app, {label: {text: 'File'}, input: {name: 'file', label: 'File', accept: 'image/*,application/pdf'}}).add(fieldset)
         new Hidden(this.app, {name: 'document_type', value: this.props.type}).add(fieldset)

@@ -8,7 +8,14 @@ export default class Home extends View
     constructor(app, props)
     {
         super(app, props)
-        this.chat = new Chat(app).add(this.root)
+    }
+
+    render(params)
+    {
+        console.log('params', params.get('message'))
+        let message = ''
+        if(params.get('message')) message = params.get('message')
+        this.chat = new Chat(app, message).add(this.root)
     }
 
     nav(template)

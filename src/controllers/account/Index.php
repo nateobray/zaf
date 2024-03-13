@@ -22,7 +22,8 @@ class Index
         'activate' => Permission::ANY,
         'auth' => Permission::ANY,
         'testEmail' => Permission::ANY,
-        'logout' => Permission::ANY
+        'logout' => Permission::ANY,
+        'getProgress' => Permission::ANY
     ];
 
     private Querier $querier;
@@ -225,6 +226,14 @@ class Index
         session_destroy();
         header('Location: /');
         exit();
+    }
+
+    public function getProgress()
+    {
+        $lh = new Lighthouse();
+        $response = $lh->send(null, 'GET', '/v1/customers/cases/CustomerCaseProgress/?customer_case_id=' . $this->session->user->cust_chat->customer_case_id);
+        
+        return $this->data = $response->data;
     }
 
 }

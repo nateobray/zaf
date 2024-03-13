@@ -12,7 +12,8 @@ class Lighthouse
             'session_id' => session_id(),
         ];
         if(!empty($message)) $data = array_merge($data, $message);
-        if(strtolower($method) === 'get') $path .= '?' . http_build_query($data);
+        if(strtolower($method) === 'get' && strpos($path, '?') === false) $path .= '?' . http_build_query($data);
+        if(strtolower($method) === 'get' && strpos($path, '?') !== false) $path .= '&' . http_build_query($data);
 
         $ch = curl_init();   
         $url = 'https://' . __LIGHTHOUSE__ . $path;
@@ -25,7 +26,7 @@ class Lighthouse
         if(strtolower($method) === 'post') curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         
         $response = curl_exec($ch);
-
+        
         $info = curl_getinfo($ch);
         return json_decode($response);
     }
