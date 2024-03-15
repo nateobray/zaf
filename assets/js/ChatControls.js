@@ -1,5 +1,6 @@
 import DataChat from "./DataChat.js"
 import { Element } from "./Element.js"
+import { BlockChat } from "./components/BlockChat.js"
 import { LoginForm } from "./components/LoginForm.js"
 import { SignupForm } from "./components/SignupForm.js"
 import { UploadForm } from "./components/UploadForm.js"
@@ -16,9 +17,8 @@ export class ChatControls extends Element
         this.props = props
         this.model = this.props.model
         this.app = app
-
-        console.log('created chat controls')
-
+        this.storage = window.localStorage;
+        
         this.status = new Element('div', '', {class: 'status-message'}).add(this.root)
         const form = new Element('form').add(this.root)
         this.text = new Element('textarea', {input: this.autoExpand.bind(this), blur: this.autoShrink.bind(this), focus: this.autoExpand.bind(this), click: this.cursorToEnd.bind(this)}).add(form)
@@ -80,6 +80,12 @@ export class ChatControls extends Element
                     case 'presentUploadForm':
                         if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
                         new UploadForm(this.app, this, {...this.currentArgs, ...{controls: this}}).add(this.chatBubble.content)
+                        break;
+                    case 'blockChat':
+                        this.storage.setItem('isBlocked', true)
+                        if(!this.chatBubble) this.chatBubble = this.props.onNewMessage('assistant', '')
+                        new BlockChat(this.app, this, {...this.currentArgs, ...{controls: this}}).add(this.chatBubble.content)
+                        this.remove();
                         break;
                 }
 

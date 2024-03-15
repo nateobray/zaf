@@ -2,6 +2,7 @@ import { ChatBubble } from "./ChatBubble.js"
 import { ChatControls } from "./ChatControls.js"
 import DataChat from "./DataChat.js"
 import { Element } from "./Element.js"
+import { BlockChat } from "./components/BlockChat.js"
 import { LoginForm } from "./components/LoginForm.js"
 import { SignupForm } from "./components/SignupForm.js"
 import { UploadForm } from "./components/UploadForm.js"
@@ -16,6 +17,7 @@ export class Chat extends Element
         this.props = props
         this.app = app
         this.message = message
+        this.storage = window.localStorage;
         this.model = new DataChat((this.props&&this.props.type)?this.props.type:1)
 
         this.conversationWindow = new Element('div', {class: 'conversation-window'}).add(this.root)
@@ -27,7 +29,9 @@ export class Chat extends Element
         this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png', width: 270}).add(this.regulatory)
         new Element('br').add(this.regulatory)
         new Element('a', 'utahinnovationoffice.org', {href: 'https://utahinnovationoffice.org', target: '_blank'}).add(this.regulatory)
-        this.controls = new ChatControls(this.app, {model: this.model, onNewMessage: this.onNewMessage.bind(this)}).add(this.root)
+        if(!this.storage.getItem('isBlocked')){
+            this.controls = new ChatControls(this.app, {model: this.model, onNewMessage: this.onNewMessage.bind(this)}).add(this.root)
+        }
         const search = new URLSearchParams(window.location.search)
 
         addEventListener("resize", (event) => {
@@ -45,7 +49,7 @@ export class Chat extends Element
 
     async initConversation(search)
     {
-        this.controls.setStatusMessage('Your AI assistant is typing...')
+        if(this.controls) this.controls.setStatusMessage('Your AI assistant is typing...')
         const chat = await this.model.init()
         this.model.type = chat.chat_type_id
         console.log('model', this.model)
@@ -59,15 +63,19 @@ export class Chat extends Element
                 switch(message.name){
                     case 'presentSignupForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new SignupForm(this.app, this.controls).add(chatBubble.content)
+                        new SignupForm(this.app, this.controls?this.controls:null).add(chatBubble.content)
                         break;
                     case 'presentLoginForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new LoginForm(this.app, this.controls).add(chatBubble.content)
+                        new LoginForm(this.app, this.controls?this.controls:null).add(chatBubble.content)
                         break;
                     case 'presentUploadForm':
                         chatBubble = this.onNewMessage('assistant', '')
-                        new UploadForm(this.app, this.controls, {controls: this.controls}).add(chatBubble.content)
+                        new UploadForm(this.app, this.controls?this.controls:null, {controls: this.controls?this.controls:null}).add(chatBubble.content)
+                        break;
+                    case 'blockChat':
+                        chatBubble = this.onNewMessage('assistant', '')
+                        new BlockChat(this.app, this).add(chatBubble.content)
                         break;
                 }
                 return
@@ -76,9 +84,9 @@ export class Chat extends Element
             if(message.role == 'user') type = 'client'
             lastChatBubble = this.onInitMessage(type, message.content)
         })
-        this.controls.clearStatusMessage();
+        if(this.controls) this.controls.clearStatusMessage();
 
-        if(search.has('message') && this.message != ''){
+        if(search.has('message') && this.message != '' && this.controls){
             this.controls.send(this.message, "client")
             return
         }
