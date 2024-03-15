@@ -29,6 +29,16 @@ class Index
             </head>
             <body>
             
+                <!-- Google tag (gtag.js) -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JL8CCKYB2"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag(\'js\', new Date());
+
+                    gtag(\'config\', \'G-4JL8CCKYB2\');
+                    gtag(\'config\', \'AW-11482071246\');
+                </script>
             </body>
         </html>';
     }
