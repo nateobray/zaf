@@ -9,7 +9,8 @@ export default class Case extends View
     constructor(app, props)
     {
         super(app, props)
-        this.chat = new Chat(app, {type: CHAT_TYPE.GENERIC}).add(this.root)  
+        console.log('Case', {type: CHAT_TYPE.GENERIC})
+        this.chat = new Chat(app, null, {type: CHAT_TYPE.GENERIC}).add(this.root)  
     }
 
     nav(template)

@@ -52,7 +52,7 @@ export class ChatControls extends Element
         gtag("event", "chat", {
             method: "chat-send"
         });
-
+        
         const returnMessage = await this.model.send(message, this.onReceiveMessage.bind(this), type)
 
     }
