@@ -12,6 +12,7 @@ export default class Case extends View
         console.log('Case', {type: CHAT_TYPE.GENERIC})
 
         app.template.progress.removeClass('hidden')
+        app.template.renderProgress()
 
         this.chat = new Chat(app, null, {type: CHAT_TYPE.GENERIC}).add(this.root)  
     }
