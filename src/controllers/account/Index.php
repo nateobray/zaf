@@ -231,9 +231,11 @@ class Index
     public function getProgress()
     {
         $lh = new Lighthouse();
-        $response = $lh->send(null, 'GET', '/v1/customers/cases/CustomerCaseProgress/?customer_case_id=' . $this->session->user->cust_chat->customer_case_id);
-        
-        return $this->data = $response->data;
+        if(!empty($this->session->user->cust_chat->customer_case_id)){
+            $response = $lh->send(null, 'GET', '/v1/customers/cases/CustomerCaseProgress/?customer_case_id=' . $this->session->user->cust_chat->customer_case_id);
+            return $this->data = $response->data;
+        }
+        return $this->data = [];
     }
 
 }

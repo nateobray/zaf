@@ -10,6 +10,9 @@ export default class Case extends View
     {
         super(app, props)
         console.log('Case', {type: CHAT_TYPE.GENERIC})
+
+        app.template.progress.removeClass('hidden')
+
         this.chat = new Chat(app, null, {type: CHAT_TYPE.GENERIC}).add(this.root)  
     }
 

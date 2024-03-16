@@ -345,8 +345,10 @@ form.grid-auto-columns-4 div:first-child {
     max-width: 0;
 }
 
-
-
 .float-right {
     float: right;
+}
+
+.hidden {
+    display: none;
 }

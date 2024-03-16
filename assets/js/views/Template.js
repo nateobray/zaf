@@ -41,12 +41,14 @@ export class Template
         let percent = ((response.data.length/6) * 100).toFixed(0)
         if(percent > 100) percent = 100
 
-        this.progress = new Element('div', 'Progress', {class: 'progress'}).add(this.header)
+        this.progress = new Element('div', 'Progress', {class: 'progress hidden'}).add(this.header)
         this.progressBar = new Element('div', {class: 'bar'}).add(this.progress)
         this.progressBarStatus = new Element('div', {class: 'status', style: "width: " + percent + "%"}).add(this.progressBar)
         this.pullDownBtn = new Element('div', '<i class="fa-solid fa-grip-lines"></i>', {class: 'progress-pull-down-btn', mousedown: this.clickProgressBtn.bind(this)}).add(this.progress)
 
         this.progressList = new Element('div', {class: 'progress-list'}).add(this.progress)
+
+        console.log('progress', this.progress)
 
         if(!completedSteps.includes(6)){
             new Element('h3', "Steps to Build Your Case", {class: 'grid-span-2'}).add(this.progressList)
