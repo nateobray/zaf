@@ -33,6 +33,28 @@ export class Template
 
         this.progress = new Element('div', 'Progress', {class: 'progress hidden'}).add(this.header)
         
+        
+    }
+
+    async renderProgress()
+    {
+        this.progress.setHTML('')
+        const response = await this.app.fetch('/account/getProgress/')
+
+        const completedSteps = []
+        response.data.forEach( step => {
+            completedSteps.push(step.customer_case_progress_type_id)
+        })
+
+        let percent = ((response.data.length/6) * 100).toFixed(0)
+        if(percent > 100) percent = 100
+
+        this.progressBar = new Element('div', {class: 'bar'}).add(this.progress)
+        this.progressBarStatus = new Element('div', {class: 'status', style: "width: " + percent + "%"}).add(this.progressBar)
+        this.pullDownBtn = new Element('div', '<i class="fa-solid fa-grip-lines"></i>', {class: 'progress-pull-down-btn', mousedown: this.clickProgressBtn.bind(this)}).add(this.progress)
+
+        this.progressList = new Element('div', {class: 'progress-list'}).add(this.progress)
+
         if(!completedSteps.includes(6)){
             new Element('h3', "Steps to Build Your Case", {class: 'grid-span-2'}).add(this.progressList)
             new Element('div', (completedSteps.includes(1))?'<i class="fa-solid fa-circle-check success"></i>':'<i class="fa-regular fa-circle"></i>', {class: 'progress-list-icon'}).add(this.progressList)
@@ -66,26 +88,6 @@ export class Template
             new Element('br').add(caseSummary)
             new Element('button', '<i class="fa-solid fa-file-lines"></i> Download Case Summary', {class: 'btn btn-primary'}).add(caseSummary)
         }
-    }
-
-    async renderProgress()
-    {
-        this.progress.setHTML('')
-        const response = await this.app.fetch('/account/getProgress/')
-
-        const completedSteps = []
-        response.data.forEach( step => {
-            completedSteps.push(step.customer_case_progress_type_id)
-        })
-
-        let percent = ((response.data.length/6) * 100).toFixed(0)
-        if(percent > 100) percent = 100
-
-        this.progressBar = new Element('div', {class: 'bar'}).add(this.progress)
-        this.progressBarStatus = new Element('div', {class: 'status', style: "width: " + percent + "%"}).add(this.progressBar)
-        this.pullDownBtn = new Element('div', '<i class="fa-solid fa-grip-lines"></i>', {class: 'progress-pull-down-btn', mousedown: this.clickProgressBtn.bind(this)}).add(this.progress)
-
-        this.progressList = new Element('div', {class: 'progress-list'}).add(this.progress)
     }
 
     async clickProgressBtn(e)
