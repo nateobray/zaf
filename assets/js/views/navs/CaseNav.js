@@ -36,7 +36,7 @@ export default class CaseNav extends Element
         this.accidentAssistant = new Element('div', '&nbsp; Accident Info Ava', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
         this.settlementAssistant = new Element('div', '&nbsp; Tally ', {class: 'progress-item', click: function(){}}).add(this.caseProgress)
 
-        this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png',  width: 150}).add(this.root)
+        //this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png',  width: 150}).add(this.root)
         this.regulatory = new Element('p', 'This service is provided by an entity that is not a traditional legal provider. This entity is owned/managed (fully or partially) by nonlawyers who are not subject to the same rules as lawyers.', {class: 'regulatory-text'}).add(this.root)
         
     }
