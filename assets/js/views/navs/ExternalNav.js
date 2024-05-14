@@ -51,7 +51,7 @@ export default class ExternalNav extends Element
         this.chat.onNewMessage('client', 'How much does ZAF cost?')
         this.chat.controls.setStatusMessage()
         setTimeout(function(){
-            this.chat.onNewMessage('assistant', "ZAF stands for Zero Attorney Fees because it truly is free to everyone.\n\n You can even consult with a ZAF lawyer for free. If you end up needing full representation from a live lawyer to get a fair result, ZAF will connect you with an experienced local lawyer who will undertake representation at a reduced fee (about 10% less than the going rates in the industry). This gets paid out of the settlement at the end of the case rather than out of your pocket.\n\n" + "Now, can you tell me more about your accident?")
+            this.chat.onNewMessage('assistant', "ZAF stands for Zero Attorney Fees because it truly is free to everyone. <br/><br/> You can even consult with a ZAF lawyer for free. If you end up needing full representation from a live lawyer to get a fair result, ZAF will connect you with an experienced local lawyer who will help you. This gets paid out of the settlement at the end of the case rather than out of your pocket. <br/><br/> Now, can you tell me more about your accident?")
             this.chat.controls.clearStatusMessage()
         }.bind(this), 2500)
         
