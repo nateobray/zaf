@@ -77,7 +77,8 @@ class Index
             'user_password' => $password,
             'user_is_active' => false,
             'user_phone' => $phone,
-            'user_is_demo' => !empty($is_demo)?true:false
+            // 'user_is_demo' => !empty($is_demo)?true:false
+            'user_is_demo' => false
         ]);
         $User->user_id = $this->querier->insert($User)->run();
 
@@ -128,7 +129,8 @@ class Index
                 'last_name' => $last_name,
                 'email' => $email,
                 'phone' => $phone,
-                'is_demo' => !empty($is_demo)?true:false
+                // 'is_demo' => !empty($is_demo)?true:false
+                'is_demo' => false
             ], 'GET', '/v1/chatbot/chat/updateCustomer');
             $this->data = $response->data;
         } catch (\Throwable $e){
