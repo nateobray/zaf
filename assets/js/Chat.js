@@ -28,7 +28,6 @@ export class Chat extends Element
 
         this.regulatory = new Element('div', {class: 'regulatory-container'}).add(this.conversation)
 
-        this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png', width: 270}).add(this.regulatory)
         new Element('br').add(this.regulatory)
         new Element('a', 'utahinnovationoffice.org', {href: 'https://utahinnovationoffice.org', target: '_blank'}).add(this.regulatory)
         if(!this.storage.getItem('isBlocked')){
