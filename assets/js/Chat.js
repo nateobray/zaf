@@ -28,8 +28,6 @@ export class Chat extends Element
 
         this.regulatory = new Element('div', {class: 'regulatory-container'}).add(this.conversation)
 
-        new Element('br').add(this.regulatory)
-        new Element('a', 'utahinnovationoffice.org', {href: 'https://utahinnovationoffice.org', target: '_blank'}).add(this.regulatory)
         if(!this.storage.getItem('isBlocked')){
             this.controls = new ChatControls(this.app, {model: this.model, onNewMessage: this.onNewMessage.bind(this)}).add(this.root)
         }
