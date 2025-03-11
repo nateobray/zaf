@@ -36,9 +36,7 @@ export default class ExternalNav extends Element
         a = new Element('a', {click: this.about.bind(this, )}).add(li)
         new Element('span', 'About').add(a)
 
-        this.badge = new Element('img', {src: '/assets/images/sandbox-authorized-entities-badge-2023-inverted.png',  width: 150}).add(ul)
-        this.regulatory = new Element('p', 'This service is provided by an entity that is not a traditional legal provider. This entity is owned/managed (fully or partially) by nonlawyers who are not subject to the same rules as lawyers.\n\n Now please tell me more about your accident?', {class: 'regulatory-text'}).add(ul)
-        // 
+        this.regulatory = new Element('p', 'The ZAF AI provides legal information but is not a lawyer, does not create an attorney-client relationship, and is not a substitute for legal advice.', {class: 'regulatory-text'}).add(ul)
         
     }
 
